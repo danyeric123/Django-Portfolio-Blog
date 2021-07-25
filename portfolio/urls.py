@@ -20,6 +20,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     
     # Adding a path to my projects.urls
+    path('', include('projects.urls')),
     path('projects/', include('projects.urls')),
     path('blog/', include("blog.urls"))
 ]

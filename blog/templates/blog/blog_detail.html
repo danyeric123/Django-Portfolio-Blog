@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "projects/base.html" %}
 {% block content %}
 <div class="col-md-8 offset-md-2">
     <h1>{{ post.title }}</h1>
@@ -12,6 +12,15 @@
         {% endfor %}
     </small>
     <p>{{ post.body | linebreaks }}</p>
+    <h3>Comments:</h3>
+    {% for comment in comments %}
+    <p>
+        <b>{{ comment.author }}</b> wrote:
+    </p>
+    <p>{{ comment.body }}</p>
+    <p class="text-muted">{{comment.created_on}}</p>
+    <hr>
+    {% endfor %}
     <h3>Leave a comment:</h3>
     <form action="/blog/{{ post.pk }}/" method="post">
         {% csrf_token %}
@@ -23,14 +32,5 @@
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
-    <h3>Comments:</h3>
-    {% for comment in comments %}
-    <p>
-        On {{comment.created_on.date }}&nbsp;
-        <b>{{ comment.author }}</b> wrote:
-    </p>
-    <p>{{ comment.body }}</p>
-    <hr>
-    {% endfor %}
 </div>
 {% endblock %}
