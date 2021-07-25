@@ -7,6 +7,7 @@ def blog_index(request):
   posts = Post.objects.all().order_by('-created_on')
   context = {
     "posts": posts,
+    "title": "All Blogs"
   }
   return render(request,"blog_index.html", context)
 
@@ -19,7 +20,8 @@ def blog_category(request, category):
   
   context = {
     "category": category,
-    "posts": posts
+    "posts": posts,
+    "title": f'{category} Posts'
   }
   
   return render(request,"blog_category.html", context)
@@ -42,7 +44,8 @@ def blog_detail(request, pk):
   context = {
     "comments": comments,
     "post": post,
-    "form": form
+    "form": form,
+    "title": f'{post.title}'
   }
   
   return render(request,"blog_detail.html", context)
