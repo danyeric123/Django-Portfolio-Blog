@@ -14,8 +14,11 @@ def blog_index(request):
         title = form.cleaned_data['title'],
       )
       for category in categories_input:
-        cat = Category(name=category)
-        cat.save()
+        if not Category.objects.filter(name=category).exists():
+          cat = Category(name=category)
+          cat.save()
+        else:
+          cat = Category.objects.get(name=category)
         post.categories.add(cat)
       post.save()
   posts = Post.objects.all().order_by('-created_on')
