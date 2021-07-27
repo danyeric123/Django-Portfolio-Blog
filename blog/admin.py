@@ -3,7 +3,7 @@ from blog.models import Post, Category
 
 # Register your models here.
 class PostAdmin(admin.ModelAdmin):
-  pass
+  list_display = ("title","created_on")
 
 class CategoryAdim(admin.ModelAdmin):
   pass
