@@ -12,6 +12,7 @@ def blog_index(request):
       post = Post.objects.create(
         body = form.cleaned_data['body'],
         title = form.cleaned_data['title'],
+        author = str(request.user),
       )
       for category in categories_input:
         cat, _ = Category.objects.get_or_create(name=category)
@@ -35,7 +36,24 @@ def blog_category(request, category):
   context = {
     "category": category,
     "posts": posts,
+    "isAuthor": False,
     "title": f'{category} Posts'
+  }
+  
+  return render(request,"blog_category.html", context)
+
+def blog_author(request, author):
+  posts = Post.objects.filter(
+    author__contains = author
+  ).order_by(
+    '-created_on'
+  )
+  
+  context = {
+    "category": author,
+    "isAuthor": True,
+    "posts": posts,
+    "title": f'{author} Posts'
   }
   
   return render(request,"blog_category.html", context)

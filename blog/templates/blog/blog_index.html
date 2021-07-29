@@ -20,6 +20,7 @@
   {% for post in posts %}
     <h2><a href="{% url 'blog_detail' post.pk%}">{{ post.title }}</a></h2>
     <small>
+        <a href="{% url 'blog_author' post.author %}">{{post.author}}</a> |&nbsp;
         {{ post.created_on.date }} |&nbsp;
         Categories:&nbsp;
         {% for category in post.categories.all %}
@@ -29,7 +30,7 @@
         {% endfor %}
     </small>
     <p>{{ post.body | slice:":400" }}...</p>
-    <a href="/blog/{{ post.pk }}/delete/">Delete</a>
+    <a href="{% url 'blog_delete' post.pk %}">Delete</a>
   {% endfor %}
 </div>
 {% endblock %}
