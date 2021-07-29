@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'projects/base.html' %}
 
 {% block content %}
 <h2>Login</h2>
@@ -9,8 +9,7 @@
     <input type="submit" value="Login">
 </form>
 
-<a href="{% url 'dashboard' %}">Back to dashboard</a>
-<a href="{% url 'social:begin' 'github' %}">Login with GitHub</a>
+<a href="{% url 'blog_index' %}">Back to dashboard</a>
 <a href="{% url 'password_reset' %}">Reset password</a>
 <a href="{% url 'register' %}">Register</a>
 {% endblock %}
