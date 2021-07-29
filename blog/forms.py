@@ -1,4 +1,5 @@
 from django import forms
+from django.contrib.auth.forms import UserCreationForm
 
 class CommentForm(forms.Form):
     author = forms.CharField(
@@ -42,3 +43,7 @@ class PostForm(forms.Form):
             "placeholder": "Categories"   
         }
     ))
+    
+class CustomUserCreationForm(UserCreationForm):
+    class Meta(UserCreationForm.Meta):
+        fields = UserCreationForm.Meta.fields + ("email",)
